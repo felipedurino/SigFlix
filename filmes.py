@@ -1,16 +1,17 @@
 import requests
 import os
+import creds
 #class Filme:
 def procurar_filme(nome_filme):
         os.system('cls')
     
-        API_KEY = 'a2441588784028a04a0ac4785d0489d0'
+        
 
         
         BASE_URL = 'https://api.themoviedb.org/3'
 
     
-        procurar_url = f'{BASE_URL}/search/movie?api_key={API_KEY}&query={nome_filme}'
+        procurar_url = f'{BASE_URL}/search/movie?api_key={creds.API_KEY}&query={nome_filme}'
         response = requests.get(procurar_url)
         if response.status_code == 200:
             search_results = response.json()
