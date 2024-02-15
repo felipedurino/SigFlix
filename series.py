@@ -17,7 +17,7 @@ def procurar_series(tv_show_titulo):
 
                 tv_show_id = procurar_resultados['results'][0]['id']
 
-                tv_show_url = f'{BASE_URL}/tv/{tv_show_id}?api_key={API_KEY}&language=pt-BR'
+                tv_show_url = f'{BASE_URL}/tv/{tv_show_id}?api_key={creds.API_KEY}&language=pt-BR'
                 tv_show_response = requests.get(tv_show_url)
                 if tv_show_response.status_code ==200:
                     tv_show_data= tv_show_response.json()
@@ -27,14 +27,14 @@ def procurar_series(tv_show_titulo):
                     first_air_date = tv_show_data['first_air_date']
                     poster_path = tv_show_data['poster_path']
 
-                    atores_url = f'{BASE_URL}/tv/{tv_show_id}/credits?api_key={API_KEY}'
+                    atores_url = f'{BASE_URL}/tv/{tv_show_id}/credits?api_key={creds.API_KEY}'
                     atores_response = requests.get(atores_url)
                     if atores_response.status_code == 200:
                         atores_data= atores_response.json()
                         cast = [actor['name']for actor in atores_data['cast'][:6]]
 
 
-                    videos_url = f'{BASE_URL}/tv/{tv_show_id}/videos?api_key={API_KEY}'
+                    videos_url = f'{BASE_URL}/tv/{tv_show_id}/videos?api_key={creds.API_KEY}'
                     videos_response = requests.get(videos_url)
                     if videos_response.status_code == 200:
                         videos_data = videos_response.json()
