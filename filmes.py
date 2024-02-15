@@ -20,7 +20,7 @@ def procurar_filme(nome_filme):
                 movie_id = search_results['results'][0]['id']
                 
             
-                movie_url = f'{BASE_URL}/movie/{movie_id}?api_key={API_KEY}&language=pt-BR'
+                movie_url = f'{BASE_URL}/movie/{movie_id}?api_key={creds.API_KEY}&language=pt-BR'
                 movie_response = requests.get(movie_url)
                 if movie_response.status_code == 200:
                     movie_data = movie_response.json()
@@ -31,14 +31,14 @@ def procurar_filme(nome_filme):
                     poster_path = movie_data['poster_path']
                     
                     
-                    credits_url = f'{BASE_URL}/movie/{movie_id}/credits?api_key={API_KEY}'
+                    credits_url = f'{BASE_URL}/movie/{movie_id}/credits?api_key={creds.API_KEY}'
                     credits_response = requests.get(credits_url)
                     if credits_response.status_code == 200:
                         credits_data = credits_response.json()
                         cast = [actor['name'] for actor in credits_data['cast'][:6]]  # Obtém os 5 principais atores
                         
                 
-                    videos_url = f'{BASE_URL}/movie/{movie_id}/videos?api_key={API_KEY}'
+                    videos_url = f'{BASE_URL}/movie/{movie_id}/videos?api_key={creds.API_KEY}'
                     videos_response = requests.get(videos_url)
                     if videos_response.status_code == 200:
                         videos_data = videos_response.json()
@@ -52,7 +52,7 @@ def procurar_filme(nome_filme):
                     print(f'Atores Principais: {", ".join(cast)}\n')
                     print(f'Data de Lançamento: {release_date}\n')
 
-                    movie_url = f'{BASE_URL}/movie/{movie_id}?api_key={API_KEY}'
+                    movie_url = f'{BASE_URL}/movie/{movie_id}?api_key={creds.API_KEY}'
                     movie_response = requests.get(movie_url)
                     if movie_response.status_code == 200:
                         movie_data = movie_response.json()
